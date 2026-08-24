@@ -100,6 +100,10 @@ FUSED_TESTS=(
     test_mm_wfp8a16.py
 )
 
+GEMM_TESTS=(
+    test_int8_scaled_mm.py
+)
+
 ALL_TESTS=(
     "${SMOKE_TESTS[@]}"
     "${NORM_TESTS[@]}"
@@ -109,6 +113,7 @@ ALL_TESTS=(
     "${MAMBA_TESTS[@]}"
     "${FLA_TESTS[@]}"
     "${FUSED_TESTS[@]}"
+    "${GEMM_TESTS[@]}"
 )
 
 SMALL_BATCH_TESTS=(
@@ -155,9 +160,12 @@ case "$TEST_GROUP" in
     fused)
         TESTS=("${FUSED_TESTS[@]}")
         ;;
+    gemm)
+        TESTS=("${GEMM_TESTS[@]}")
+        ;;
     *)
         echo "Unknown test group: $TEST_GROUP"
-        echo "Available groups: small, all, smoke, norm, attention, cache, speculative, mamba, fla, fused"
+        echo "Available groups: small, all, smoke, norm, attention, cache, speculative, mamba, fla, fused, gemm"
         exit 1
         ;;
 esac
